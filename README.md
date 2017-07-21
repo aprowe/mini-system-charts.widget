@@ -6,8 +6,6 @@ They are broken down into individual widgets and each have several options for c
 
 ![img.png](images/img1.png)
 
-![img2.png](images/img2.png)
-
 #### Widget Displays:
 - **CPU Usage**
 - **RAM Usage**  
