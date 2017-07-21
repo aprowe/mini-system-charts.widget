@@ -4,6 +4,10 @@
 Mini System Info Charts are small Übersicht widgets using [Peity](https://github.com/benpickles/peity).
 They are broken down into individual widgets and each have several options for cusomization.
 
+![img.png](images/img1.png)
+
+![img2.png](images/img2.png)
+
 #### Widget Displays:
 - **CPU Usage**
 - **RAM Usage**  
