@@ -29,7 +29,7 @@ Much credit goes to these repositories, thanks!
 
 ## Installation
 Make sure you have Übersicht installed, and then clone this repository.
-IMPORTANT: Make sure you name the resulting folder amar-bar.widget, or change the image paths in background.coffee and focused-window.coffee, since they source css and scripts (respectively) starting with the parent directory's name.
+IMPORTANT: Make sure you name the resulting folder mini-system-charts.widget, or change the paths in the network scripts (assets/network.sh and network.coffee), since they use the parent directory's name.
 
 ```bash
 # or wherever your ubersicht looks for widgets (mine looks in ~/.config/ubersicht/widgets/)
