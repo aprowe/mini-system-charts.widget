@@ -1,10 +1,10 @@
 require('./assets/lib/piety')($, document)
 
-# Throughput Network widget
+# network Network widget
 # Based on:
 # Tsushin widget for ubersicht
-# network throughput in kB
-# Heavily inspired by Dion Munk's work network-throughput http://tracesof.net/uebersicht-widgets/#ubersicht-network-throughput
+# network network in kB
+# Heavily inspired by Dion Munk's work network-network http://tracesof.net/uebersicht-widgets/#ubersicht-network-network
 
 ## Colors of chart
 colors =
@@ -14,19 +14,22 @@ colors =
 ## Width of chart
 chartWidth = 40
 
-## Try 'bar'!
-chartType = 'line'
+## Number of data points to on the chart
+dataPointCount = 10
+
+## Try 'line'!
+chartType = 'bar'
 
 chartIn = null
 chartOut = null
-valuesIn  = [0,0,0,0,0,0,0]
-valuesOut = [0,0,0,0,0,0,0]
+valuesIn   = (0 for i in [0..dataPointCount])
+valuesOut  = (0 for i in [0..dataPointCount])
 
 command: """
-if [ ! -e assets/throughput.sh ]; then
-  "$PWD/mini-stats-bar.widget/assets/throughput.sh"
+if [ ! -e assets/network.sh ]; then
+  "$PWD/mini-system-charts.widget/assets/network.sh"
 else
-  "$PWD/assets/throughput.sh"
+  "$PWD/assets/network.sh"
 fi
 """
 
@@ -35,7 +38,7 @@ refreshFrequency: 2000
 
 # Change container size to change the sizing of the chart
 render: () -> """
-<div class='throughput'>
+<div class='network'>
   <div class='chart-in'></div>
   <div class='chart-out'></div>
   <div class='number'></div>
@@ -58,10 +61,10 @@ update:(output,el) ->
 
 
   @run '''
-    if [ ! -e assets/throughput.sh ]; then
-      "$PWD/mini-stats-bar.widget/assets/throughput.sh"
+    if [ ! -e assets/network.sh ]; then
+      "$PWD/mini-system-charts.widget/assets/network.sh"
     else
-      "$PWD/assets/throughput.sh"
+      "$PWD/assets/network.sh"
     fi
    ''', (err, output) ->
       data = output.split(" ");
@@ -72,14 +75,14 @@ update:(output,el) ->
         return
 
       ## Push the in value on the stack
-      valuesIn.shift() if valuesIn.length >= 10
+      valuesIn.shift() if valuesIn.length >= dataPointCount
       valuesIn.push(dataIn)
       chartIn
         .text(valuesIn.join(","))
         .change()
 
       ## Push the out value on the stach
-      valuesOut.shift() if valuesIn.length >= 10
+      valuesOut.shift() if valuesIn.length >= dataPointCount
       valuesOut.push(dataOut)
       chartOut
         .text(valuesOut.join(","))

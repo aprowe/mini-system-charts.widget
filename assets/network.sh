@@ -12,23 +12,23 @@ whereNetstat=$(which netstat)
 
 foundPaths="${whereCat///cat}:${whereAwk///awk}:${whereNetstat///netstat}"
 ####
-function getThroughput(){
+function getnetwork(){
   export PATH="$foundPaths" &&
-  netstat -iw 1 | head -n3 | tail -n1 | awk '{print $3 " " $6}' > "$1/throughput.db" &
+  netstat -iw 1 | head -n3 | tail -n1 | awk '{print $3 " " $6}' > "$1/network.db" &
   process=$!
   sleep 1.5
   pkill -P $process
 
-  in=$(cat "$1/throughput.db" | awk '{print $1}')
-  out=$(cat "$1/throughput.db" | awk '{print $2}')
+  in=$(cat "$1/network.db" | awk '{print $1}')
+  out=$(cat "$1/network.db" | awk '{print $2}')
 
   echo $in $out
 }
 ####
 
 #### the code below handles cases where a user might have copied files of widget to a non-default widget folder
-if [ ! -e "$PWD/assets/throughput.sh" ]; then
-  getThroughput "$PWD/mini-stats-bar.widget/assets"
+if [ ! -e "$PWD/assets/network.sh" ]; then
+  getnetwork "$PWD/mini-system-charts.widget/assets"
 else
-  getThroughput "$PWD"
+  getnetwork "$PWD"
 fi

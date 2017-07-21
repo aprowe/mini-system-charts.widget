@@ -19,7 +19,7 @@ diskIndex    = 0
 base10       = true
 
 # Max size in (GB) you want to compare your free space to be
-# if set to null, compares to your total size
+# if set to null, compares to your total disk size
 # (I found I never have more than 50GB, so I set it to that)
 maxFreeSpace      = null
 
