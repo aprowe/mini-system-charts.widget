@@ -1,7 +1,7 @@
 # Mini System Info Charts!
 ## An Übertsicht Widet
 
-Mini System Info Charts are small Übersicht widgets using [Peity](https://github.com/benpickles/peity).
+Mini System Info Charts are small [Übersicht](http://tracesof.net/uebersicht/) widgets using [Peity](https://github.com/benpickles/peity).
 They are broken down into individual widgets and each have several options for cusomization.
 
 ![img.png](images/img1.png)
