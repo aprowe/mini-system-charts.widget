@@ -6,15 +6,19 @@ require('./assets/lib/piety')($, document)
 
 ## Colors Used by the chart
 colors =
-  free: 'rgb(133, 188, 86)'
-  inactive: 'orange'
-  active: 'rgba(0,0,0,0.3)'
+  free: 'rgba(0,0,0,0.3)'
+  inactive: 'rgb(100,202,236)'
+  active: 'orange'
+  wired_down: 'rgb(255,44,37)'
+
+  ## Another option
+  # free: 'rgb(133, 188, 86)'
 
 ##  Width of the chart
 chartWidth = 15
 
-## Try 'pie'
-chartType = 'donut'
+## Try 'donut'
+chartType = 'pie'
 
 refreshFrequency: 2000 # ms
 
@@ -35,15 +39,15 @@ update: (output, el) ->
   # Output looks similar to this:
   # free:1234,inactive:2345,active:3456
   output.split(',').forEach (item)->
-    [key, value] = item.split(':')
+    [key, value] = item.replace(' ', '_').split(':')
     mem[key] = Number(value)
 
   ## Set text to free + inactive
   $(".mem .number", el).text("  #{mem.free + mem.inactive}mb")
 
   ## Display active, free, and inactive on the chart
-  $(".mem .chart", el).text("#{mem.active},#{mem.free},#{mem.inactive}").peity chartType,
-    fill: [colors.active, colors.free, colors.inactive]
+  $(".mem .chart", el).text("#{mem.wired_down},#{mem.active},#{mem.inactive},#{mem.free}").peity chartType,
+    fill: [colors.wired_down, colors.active, colors.inactive, colors.free]
     width: chartWidth
 
 

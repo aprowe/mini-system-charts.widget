@@ -2,8 +2,10 @@ require('./assets/lib/piety')($, document)
 
 ## Colors Used by the chart
 colors =
-  free: 'rgb(133, 188, 86)'
-  taken: 'rgba(0,0,0,0.3)'
+  low: 'rgb(133, 188, 86)'
+  med: 'orange'
+  high: 'rgb(255,44,37)'
+  back: 'rgba(0,0,0,0.3)'
 
 # Try 'donut'
 chartType   = 'pie'
@@ -50,14 +52,23 @@ update: (output, el) ->
   freeNum  = free.replace(/G|Gi/, '');
   totalNum = total.replace(/G|Gi/, '');
 
+  fill = colors.low
+  ## Medium Threshold
+  if freeNum < 25
+    fill = colors.med
+
+  ## High Threshold
+  if freeNum < 10
+    fill = colors.high
+
   maxFreeSpace = totalNum if not maxFreeSpace?
 
   ## Set text to free + inactive
   $(".number", el).text(free)
 
   ## Set chart up
-  $('.chart', el).html("#{freeNum}/#{maxFreeSpace}").peity chartType,
-    fill: [colors.free, colors.taken]
+  $('.chart', el).html("#{maxFreeSpace - freeNum}/#{maxFreeSpace}").peity chartType,
+    fill: [fill, colors.background]
     width: chartWidth
 
 style: """
